@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        #div{
+            width: 960px;
+            margin: 30px auto;
+        }
+        #div ul{
+            width: 300px;
+            margin-left: 10px;
+            float: left;
+        }
+        #div ul img{
+            width: 300px;
+            margin-top: 10px;
+            border-radius: 13px;
+            box-shadow: 5px 5px 8px rgba(0,100,0,0.7);
+        }
+    </style>
+</head>
+<body>
+    <div id="div">
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+    </div>
+    <script>
+        function checkHight(oUl) {
+            var height=10000000;
+            var index=0;
+            for(var i=0;i<oUl.length;i++){
+                var now_hight=oUl[i].offsetHeight;
+                if(now_hight<height){
+                    height=now_hight;
+                    index=i;
+                }
+            }  return index;
+        }
+
+        window.onload=function () {
+        var oBox=document.getElementById("div");
+        var oUl=oBox.getElementsByTagName("ul");
+        var vh=document.documentElement.clientHeight;
+            demo();
+        window.onscroll=function () {
+            var st=document.documentElement.scrollTop||document.body.scrollTop;
+            var bdHight=document.body.scrollHeight;
+            if(st+vh>bdHight-300){
+                demo();
+            }
+        }
+
+        function demo() {
+        for(var i=1;i<23;i++){
+          var oImg=document.createElement("img");
+          oImg.src="./img/"+i+".jpg";
+          var oLi=document.createElement("li");
+          oLi.appendChild(oImg);
+          var min_index=checkHight(oUl);
+          oUl[min_index].appendChild(oLi);
+        }
+        }}
+    </script>
+
+
+
+
+</body>
+</html>
